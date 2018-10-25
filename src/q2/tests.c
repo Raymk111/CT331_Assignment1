@@ -5,73 +5,68 @@
 void runTests(){
     printf("Tests running...\n");
     
-    printf("\ntest1\n");
+    printf("Test1\n");
     listElement* l = createEl("Test String (1).", 30);
     //printf("%s\n%p\n", l->data, l->next);
     //Test create and traverse
     traverse(l);
-    printf("\n");
+    printf("Length = %d\n", length(l));
     
     //Test insert after
-    printf("\ntest2\n");
+    printf("\nTest2\n");
     listElement* l2 = insertAfter(l, "another string (2)", 30);
     insertAfter(l2, "a final string (3)", 30);
     traverse(l);
-    printf("\n");
+    printf("Length = %d\n", length(l));
 
     // Test delete after
-    printf("\ntest3\n");
+    printf("\nTest3\n");
     deleteAfter(l);
     traverse(l);
-    printf("\n");
     
     //test Length
-    printf("\ntest4\n");
-    printf("\nLength = %d\n", length(l));
+    printf("\nTest4\n");
+    printf("Length = %d\n", length(l));
     
     //push test
-    printf("\ntest5\n");
-    push(&l, "mup", 30);
+    printf("\nTest5\n");
+    push(&l, "1", 30);
+    push(&l, "2", 30);
+    push(&l, "3", 30);
     traverse(l);
+    printf("Length = %d\n", length(l));
     
     //pop test
-    printf("\ntest6\n");
+    printf("\nTest6\n");
     listElement* test = pop(&l);
-    printEl(test);
-    printEl(l);
-    printf(" = Element Removed\nAfter removal\n");
+    while(length(l) >= 1)
+    {
+        test = pop(&l);
+        printf("Popped - ");
+        printEl(test);
+    }
+    printf(" = Element Removed\nAfter removal - Traverse should be empty\n");
     traverse(l);
-    printf("\nLength = %d\n", length(l));
+    printf("Length = %d\n", length(l));
     
     //enqueue test
-    printf("\ntest7\n");
-    enqueue(&l, "mup", 30);
+    printf("\nTest7 - Enqueue 1, 2, 3 to whats left\n");
+    enqueue(&l, "1", 30);
+    enqueue(&l, "2", 30);
+    enqueue(&l, "3", 30);
     traverse(l);
-    printf("\nLength = %d\n", length(l));
+    printf("Length = %d\n", length(l));
     
     //dequeue test
-    printf("\ntest8\n");
-    test = dequeue(l);
-    printEl(test);
-    printf(" = Element Removed\nAfter removal\n");
+    printf("\nTest8 - dequeue all elements\n");
+    while(length(l) >= 1)
+    {
+        test = dequeue(&l);
+        printf("Dequeued - ");
+        printEl(test);
+    }
+    printf("Traverse Should Print Nothing - ");
     traverse(l);
-    printf("\nLength = %d\n", length(l));
-    test = dequeue(l);
-    printEl(test);
-    printf(" = Element Removed\nAfter removal\n");
-    traverse(l);
-    printf("\nLength = %d\n", length(l));
-    test = dequeue(l);
-    printEl(test);
-    printf(" = Element Removed\nAfter removal\n");
-    traverse(l);
-    printf("\nLength = %d\n", length(l));
-    test = dequeue(l);
-    printEl(test);
-    printf(" = Element Removed\nAfter removal\n");
-    traverse(l);
-    printf("\nLength = %d\n", length(l));
-    
     
     printf("\nTests complete.\n");
 }

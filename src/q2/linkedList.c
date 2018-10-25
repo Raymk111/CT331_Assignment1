@@ -32,7 +32,11 @@ listElement* createEl(char* data, size_t size){
 
 int length(listElement* start)
 {
-    int length = (start == NULL) ? 0 : 1;
+    if(start == NULL)
+    {
+        return 0;
+    }
+    int length = 1;
     listElement* curr = start;
     while(curr->next != NULL)
     {
@@ -44,22 +48,7 @@ int length(listElement* start)
 
 void push(listElement** list, char* data, size_t size)
 {
-    listElement* newEl = malloc(sizeof(listElement*));
-    if(newEl == NULL)
-    {
-        return;
-    }
-    
-    char* dPointer = malloc(sizeof(char) * size);
-    if(dPointer == NULL)
-    {
-        free(newEl);
-        return;
-    }
-    
-    strcpy(dPointer, data);
-    newEl->data = dPointer;\
-    newEl->size = size;
+    listElement* newEl = createEl(data, size);
     newEl->next = *list;
     
     *list = newEl;
@@ -67,17 +56,30 @@ void push(listElement** list, char* data, size_t size)
 
 listElement* pop(listElement** list)
 {
+    if(list == NULL)
+        return NULL;
+    
     listElement* retElement = *list;
-    listElement* newTop = retElement->next;
-    *list = newTop;
-    retElement->next = NULL;
+    if(retElement->next != NULL)
+    {
+        listElement* newTop = retElement->next;
+        *list = newTop;
+        retElement->next = NULL;
+    }
+    else
+    {
+        *list = NULL;
+    }
     
     return retElement;
 }
 
 void printEl(listElement* list)
 {
-    printf("%s\n", list->data);
+    if(list != NULL)
+    {
+        printf("%s\n", list->data);
+    }
 }
 
 //Prints out each element in the list
@@ -106,12 +108,18 @@ void enqueue(listElement** list, char* data, size_t size)
     push(list, data, size);
 }
 
-listElement* dequeue(listElement* list)
+listElement* dequeue(listElement** list)
 {
-    listElement* curr = list;
-    listElement* ret = list;
-    int len = length(list);
+    listElement* curr = *list;
+    listElement* ret = *list;
+    int len = length(*list);
     int i = 1;
+    
+    if(len == 1)
+    {
+        *list = NULL;
+        return ret;
+    }
     
     while(i < len-1)
     {

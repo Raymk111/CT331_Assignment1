@@ -1,0 +1,12 @@
+CT331 Assignment 1
+Michael Naughton - 16461226
+https://github.com/Raymk111/CT331_Assignment1
+
+There is a txt file for each question with a theory question
+q1.txt
+and
+q2.txt
+
+For Question 4 i made the functions capable of taking 
+an array they take size as a parameter then incrementing the pointer 
+if needed to print all of the array

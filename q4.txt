@@ -1,0 +1,24 @@
+On the first interation the list has to be read to the end 
+where node->next == NULL
+on subsequent searches you have to search from the head
+to the node which points to the previously read node this
+would be best done with recursion but the problem is the call
+stack grows by the size of the list (N) making a stack overflow easily
+possible
+O(n!)
+would be the result
+
+the most efficient way is to push the data from each node to a stack
+as you traverse in order and then pop the data off the stack when
+finished
+this would be 
+O(n*2)
+
+In order to make the function O(n)
+the list would have to be a Doule linked list each node having
+a node->next and node->prev
+
+Then presuming you have a function transverseReverse(Element* tail)
+you would have to pass in the tail in the params
+and the fuction would step through the list by using
+tail->prev as opposed to ->next in tranverse()

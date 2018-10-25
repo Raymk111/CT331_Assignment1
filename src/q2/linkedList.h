@@ -33,6 +33,6 @@ listElement* pop(listElement** list);
 void enqueue(listElement** list, char* data, size_t size);
 
 //dequeue for end of list and delete
-listElement* dequeue(listElement* list);
+listElement* dequeue(listElement** list);
 
 #endif

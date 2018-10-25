@@ -1,0 +1,3 @@
+An integer is 32 bits always:
+a pointer is 32bits on an x86/x32 bit system
+64bits on x64 bit system
