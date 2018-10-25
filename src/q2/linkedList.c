@@ -30,8 +30,59 @@ listElement* createEl(char* data, size_t size){
   return e;
 }
 
+int length(listElement* start)
+{
+    int length = (start == NULL) ? 0 : 1;
+    listElement* curr = start;
+    while(curr->next != NULL)
+    {
+        curr = curr->next;
+        length++;
+    }
+    return length;
+}
+
+void push(listElement** list, char* data, size_t size)
+{
+    listElement* newEl = malloc(sizeof(listElement*));
+    if(newEl == NULL)
+    {
+        return;
+    }
+    
+    char* dPointer = malloc(sizeof(char) * size);
+    if(dPointer == NULL)
+    {
+        free(newEl);
+        return;
+    }
+    
+    strcpy(dPointer, data);
+    newEl->data = dPointer;\
+    newEl->size = size;
+    newEl->next = *list;
+    
+    *list = newEl;
+}
+
+listElement* pop(listElement** list)
+{
+    listElement* retElement = *list;
+    listElement* newTop = retElement->next;
+    *list = newTop;
+    retElement->next = NULL;
+    
+    return retElement;
+}
+
+void printEl(listElement* list)
+{
+    printf("%s\n", list->data);
+}
+
 //Prints out each element in the list
-void traverse(listElement* start){
+void traverse(listElement* start)
+{
   listElement* current = start;
   while(current != NULL){
     printf("%s\n", current->data);
@@ -49,6 +100,33 @@ listElement* insertAfter(listElement* el, char* data, size_t size){
   return newEl;
 }
 
+//same as push as you are just adding to the head of the list - no redundancy by calling push
+void enqueue(listElement** list, char* data, size_t size)
+{
+    push(list, data, size);
+}
+
+listElement* dequeue(listElement* list)
+{
+    listElement* curr = list;
+    listElement* ret = list;
+    int len = length(list);
+    int i = 1;
+    
+    while(i < len-1)
+    {
+        curr = curr -> next;
+        i++;
+    }
+    
+    if(len > 1)
+    {
+        ret = curr->next;
+        curr->next = NULL;
+    }
+    
+    return ret;
+}
 
 //Delete the element after the given el
 void deleteAfter(listElement* after){

@@ -17,5 +17,22 @@ listElement* insertAfter(listElement* after, char* data, size_t size);
 //Delete the element after the given el
 void deleteAfter(listElement* after);
 
+//get length of list
+int length(listElement* start);
+
+//push() add to the top of the list
+void push(listElement** list, char* data, size_t size);
+
+//print an element
+void printEl(listElement* list);
+
+//pop from top and return
+listElement* pop(listElement** list);
+
+//enqueue to head of list
+void enqueue(listElement** list, char* data, size_t size);
+
+//dequeue for end of list and delete
+listElement* dequeue(listElement* list);
 
 #endif
